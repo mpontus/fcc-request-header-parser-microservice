@@ -4,7 +4,6 @@ var express = require('express');
 var app = express();
 
 app.get('/', function(req, res) {
-  // res.json(req.headers);
   res.json({
     ip_address: retrieveIpAddress(req),
     language: retrieveLanguage(req),
@@ -35,9 +34,7 @@ var retrieveLanguage = function (req) {
 var retrieveOperatingSystem = function (req) {
   var userAgent = req.headers['user-agent'];
   if (!userAgent) return null;
-  console.log(userAgent);
   var matches = userAgent.match(/\((.*)\)/);
-  console.log(matches);
   if (!matches) return null;
   return matches[1] || null;
 }
