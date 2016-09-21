@@ -22,7 +22,10 @@ server.listen(process.env.PORT || 3000, function () {
 });
 
 var retrieveIpAddress = function (req) {
-  return req.connection.remoteAddress;
+  return req.headers['x-forwarded-for'] ||
+         req.connection.remoteAddress ||
+         req.socket.remoteAddress ||
+         req.connection.socket.remoteAddress;
 }
 
 var retrieveLanguage = function (req) {
